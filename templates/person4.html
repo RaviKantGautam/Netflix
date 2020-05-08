@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>www.netflix.com</title>
+    {% include 'clientHeader.html' %}
+    <style>
+        .error {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+{% if message %}
+    <script>
+        alert('{{ message }}')
+    </script>
+{% endif %}
+<div class="img-fluid vh-100"
+     style=";background: url('{% static "media/IN-en-20200302-popsignuptwoweeks-perspective_alpha_website_small.jpg" %}') no-repeat fixed center center/cover">
+    <div style="background: rgba(0,0,0,0.7 )" class="vh-100">
+        <nav class="navbar navbar-expand-lg navbar-light bg-transparent">
+            <a class="navbar-brand" href="#"><img src="https://cdn.worldvectorlogo.com/logos/netflix-2.svg"
+                                                  class="img-fluid" style="width: 11rem;height:3rem;margin-left: 3rem"
+                                                  alt=""></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText"
+                    aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarText">
+                <ul class="navbar-nav mr-auto"></ul>
+                <span class="navbar-text">
+    </span>
+            </div>
+        </nav>
+        <br>
+        <br>
+        <div class="p-5 text-white w-100 mx-auto" style="background-color: black">
+            <h2 class="text-center">Display Name</h2>
+            <form action="person4" id="person4" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="row">
+                    <div class="col-sm-3">
+                        <div class="form-group text-center">
+                            <span class="m-2"><img src="https://i.ya-webdesign.com/images/default-avatar-png-9.png"
+                                                   alt="no image" style="width: 150px;height: 150px" id="img1"
+                                                   class="img-fluid p-2"></span>
+                            <span class="custom-file small" style="overflow: hidden">
+                            <label for="" id="labelimgname1" class="custom-file-label"></label>
+                            <input type="file" name="photo1" required onchange="readURL1(this)" id="file1" class="custom-file-input"
+                                   accept=".jpg,.jpeg,.png">
+                        </span>
+                            <script>
+                                var file1 = document.getElementById("file1");
+                                var img1 = document.getElementById("img1");
+                                var labelimgname1 = document.getElementById("labelimgname1");
+
+                                function readURL1(input) {
+                                    var reader = new FileReader();
+                                    reader.onload = function (e) {
+                                        img1.src = e.target.result;
+                                        labelimgname1.innerHTML = input.files[0].name;
+                                    };
+                                    reader.readAsDataURL(input.files[0]);
+                                }
+                            </script>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" required
+                                   class="form-control border-dark"
+                                   placeholder="Display Name Person 1" name="person1name">
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="form-group text-center">
+                    <span class="m-2"><img src="https://i.ya-webdesign.com/images/default-avatar-png-9.png"
+                                           alt="no image" style="width: 150px;height: 150px" id="img2"
+                                           class="img-fluid p-2"></span>
+                            <span class="custom-file small" style="overflow: hidden">
+                            <label for="" id="labelimgname2" class="custom-file-label"></label>
+                            <input type="file" name="photo2" required onchange="readURL2(this)" id="file2" class="custom-file-input"
+                                   accept=".jpg,.jpeg,.png">
+                        </span>
+                            <script>
+                                var file2 = document.getElementById("file2");
+                                var img2 = document.getElementById("img2");
+                                var labelimgname2 = document.getElementById("labelimgname2");
+
+                                function readURL2(input) {
+                                    var reader = new FileReader();
+                                    reader.onload = function (e) {
+                                        img2.src = e.target.result;
+                                        labelimgname2.innerHTML = input.files[0].name;
+                                    };
+                                    reader.readAsDataURL(input.files[0]);
+                                }
+                            </script>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" required
+                                   class="form-control border-dark"
+                                   placeholder="Display Name Person 2" name="person2name">
+                        </div>
+                    </div>                    <div class="col-sm-3">
+                        <div class="form-group text-center">
+                            <span class="m-2"><img src="https://i.ya-webdesign.com/images/default-avatar-png-9.png"
+                                                   alt="no image" style="width: 150px;height: 150px" id="img3"
+                                                   class="img-fluid p-2"></span>
+                            <span class="custom-file small" style="overflow: hidden">
+                            <label for="" id="labelimgname3" class="custom-file-label"></label>
+                            <input type="file" name="photo3" required onchange="readURL3(this)" id="file3" class="custom-file-input"
+                                   accept=".jpg,.jpeg,.png">
+                        </span>
+                            <script>
+                                var file3 = document.getElementById("file3");
+                                var img3 = document.getElementById("img3");
+                                var labelimgname3 = document.getElementById("labelimgname3");
+
+                                function readURL3(input) {
+                                    var reader = new FileReader();
+                                    reader.onload = function (e) {
+                                        img3.src = e.target.result;
+                                        labelimgname3.innerHTML = input.files[0].name;
+                                    };
+                                    reader.readAsDataURL(input.files[0]);
+                                }
+                            </script>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" required
+                                   class="form-control border-dark"
+                                   placeholder="Display Name Person 3" name="person3name">
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="form-group text-center">
+                    <span class="m-2"><img src="https://i.ya-webdesign.com/images/default-avatar-png-9.png"
+                                           alt="no image" style="width: 150px;height: 150px" id="img4"
+                                           class="img-fluid p-2"></span>
+                            <span class="custom-file small" style="overflow: hidden">
+                            <label for="" id="labelimgname4" class="custom-file-label"></label>
+                            <input type="file" name="photo4" required onchange="readURL4(this)" id="file4" class="custom-file-input"
+                                   accept=".jpg,.jpeg,.png">
+                        </span>
+                            <script>
+                                var file4 = document.getElementById("file4");
+                                var img4 = document.getElementById("img4");
+                                var labelimgname4 = document.getElementById("labelimgname4");
+
+                                function readURL4(input) {
+                                    var reader = new FileReader();
+                                    reader.onload = function (e) {
+                                        img4.src = e.target.result;
+                                        labelimgname4.innerHTML = input.files[0].name;
+                                    };
+                                    reader.readAsDataURL(input.files[0]);
+                                }
+                            </script>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" required
+                                   class="form-control border-dark"
+                                   placeholder="Display Name Person 4" name="person4name">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-red w-100">continue</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<div style="opacity: 0.9">{% include 'clientfooter.html' %}</div>
+<script>
+    $('#person4').validate();
+</script>
+</body>
+</html>

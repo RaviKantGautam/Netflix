@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>www.netflix.com</title>
+    {% include 'clientHeader.html' %}
+    <style>
+        .error{
+            color: red;
+        }
+    </style>
+</head>
+<body>
+{% if message %}
+    <script>
+    alert('{{ message }}')
+    </script>
+{% endif %}
+<div class="img-fluid vh-100"
+     style=";background: url('{% static "media/IN-en-20200302-popsignuptwoweeks-perspective_alpha_website_small.jpg" %}') no-repeat fixed center center/cover">
+    <div style="background: rgba(0,0,0,0.7 )" class="vh-100">
+        <nav class="navbar navbar-expand-lg navbar-light bg-transparent">
+            <a class="navbar-brand" href="#"><img src="https://cdn.worldvectorlogo.com/logos/netflix-2.svg"
+                                                  class="img-fluid" style="width: 11rem;height:3rem;margin-left: 3rem"
+                                                  alt=""></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText"
+                    aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarText">
+                <ul class="navbar-nav mr-auto"></ul>
+                <span class="navbar-text">
+    </span>
+            </div>
+        </nav>
+        <br>
+        <br>
+        <div class="p-5 text-white w-25 mx-auto" style="background-color: black">
+            <h2 class="text-center">Display Name</h2>
+            <form id="person1" action="person1" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="form-group text-center">
+                        <span class="m-2"><img src="https://i.ya-webdesign.com/images/default-avatar-png-9.png" alt="no image" style="width: 150px;height: 150px" id="img" class="img-fluid p-2"></span>
+                    <span class="custom-file small" style="overflow: hidden">
+                            <label for="" id="labelimgname" class="custom-file-label"></label>
+                            <input type="file" name="photo" required onchange="readURL(this)" id="file" class="custom-file-input"
+                                   accept=".jpg,.jpeg,.png">
+                        </span>
+                    <script>
+                        var file = document.getElementById("file");
+                        var img = document.getElementById("img");
+                        var labelimgname = document.getElementById("labelimgname");
+
+                        function readURL(input) {
+                            var reader = new FileReader();
+                            reader.onload = function (e) {
+                                img.src = e.target.result;
+                                labelimgname.innerHTML = input.files[0].name;
+                            };
+                            reader.readAsDataURL(input.files[0]);
+                        }
+                    </script>
+                </div>
+                <div class="form-group">
+                    <input type="text" required
+                           class="form-control border-dark"
+                           placeholder="Display Name" name="person1name" id="person1name">
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-red w-100">Continue</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<div style="opacity: 0.9">{% include 'clientfooter.html' %}</div>
+<script>
+    $('#person1').validate();
+</script>
+</body>
+</html>

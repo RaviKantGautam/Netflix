@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+    {% load static %}
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Admin DashBoard</title>
+    {% include 'adminHeader.html' %}
+    <link rel="stylesheet" href="{% static 'mycss/style4.css' %}">
+</head>
+<body>
+{% include 'adminNavbardashboard.html' %}
+<div class="container mx-auto my-4 p-5 text-white"
+     style="box-shadow: white 6px 1px 32px;background: rgba(0,0,0,0.5)">
+    <div class="display-4 text-center font-weight-bold">Subscriber List</div>
+    <hr class="bg-light">
+    <table class="table table-bordered table-hover myTable" style="background: rgba(255,255,255,0.59)">
+        <thead class="thead-dark">
+        <tr>
+            <th>billid</th>
+            <th>Date</th>
+            <th>Email</th>
+            <th>Payment</th>
+            <th>Status</th>
+            <th>Mobile</th>
+            <th>Action</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% if context %}
+            {% for row in context %}
+                <tr>
+                    <td>{{ row.0 }}</td>
+                    <td>{{ row.1 }}</td>
+                    <td>{{ row.2 }}</td>
+                    <td>{{ row.3 }}</td>
+                    <td>{{ row.4 }}</td>
+                    <td>{{ row.5 }}</td>
+                    {% if row.4 == 'unsubscribe' %}
+                        <td>
+                            <button data-toggle="tooltip" title="subscribe!" type="button" onclick="subscribe('subscribe','{{ row.2 }}')"
+                                    class="btn btn-primary"><i class="fa fa-check"></i></button>
+                        </td>
+                    {% else %}
+                        <td>
+                            <button type="button" data-toggle="tooltip" title="unsubscribe!" onclick="subscribe('unsubscribe','{{ row.2 }}')" class="btn btn-red">
+                                <i class="fa fa-times"></i></button>
+                        </td>
+                    {% endif %}
+                </tr>
+            {% endfor %}
+        {% else %}
+            <tr>
+                <td colspan="5" class="text-center text-white font-weight-bolder display-4">Nothing to show!</td>
+            </tr>
+        {% endif %}
+
+        </tbody>
+    </table>
+</div>
+{% include 'adminNavbarfoot.html' %}
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('[data-toggle="tooltip"]').tooltip();
+        $('#sidebarCollapse').on('click', function () {
+            $('#sidebar').toggleClass('active');
+            $(this).toggleClass('active');
+        });
+    });
+</script>
+
+</body>
+</html>

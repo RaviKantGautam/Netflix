@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    {% load static %}
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Add Category</title>
+    {% include 'adminHeader.html' %}
+    <link rel="stylesheet" href="{% static 'mycss/style4.css' %}">
+    <style>
+        label {
+            font-size: 1.5em;
+            line-height: 2em;
+        }
+    </style>
+</head>
+<body style="background: url('{% static "media/adminbackgroundimage.jpg" %}') no-repeat fixed center center">
+{% if message %}
+    <script>
+    alert('{{ message }}')
+    </script>
+{% endif %}
+{% include 'adminNavbardashboard.html' %}
+<form action="addcategory" method="post" id="myform" class="mx-auto p-5 text-light w-75"
+      style="margin-top: 6%;box-shadow: white 6px 1px 32px;background-color: rgba(0,0,0,0.5)" enctype="multipart/form-data">
+    {% csrf_token %}
+    <h1 class="text-center font-weight-bolder" style="background: linear-gradient(transparent 10%,red);border-radius: 15px">Add Category</h1>
+    <div class="form-group">
+        <label for="category">Category</label>
+        <input type="text" required name="category" placeholder="Enter Category Name" class="form-control">
+    </div>
+    <div class="form-group">
+        <label for="description">Description</label>
+{#        <input type="text" required name="description" placeholder="enter description" class="form-control">#}
+        <textarea name="description" id="description" rows="5" placeholder="Enter Description" class="form-control" required></textarea>
+    </div>
+    <div class="form-group">
+        <label for="category">photo</label>
+        <input type="file" required name="photo" id="photo" height="200px" width="200px" class="form-control">
+    </div>
+    <div class="form-group text-right">
+        <input type="submit" value="submit" class="btn w-50 btn-outline-light badge-pill">
+    </div>
+</form>
+<script>
+    $('#myform').validate();
+</script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#sidebarCollapse').on('click', function () {
+            $('#sidebar').toggleClass('active');
+            $(this).toggleClass('active');
+        });
+    });
+</script>
+{% include 'adminNavbarfoot.html' %}
+</body>
+</html>

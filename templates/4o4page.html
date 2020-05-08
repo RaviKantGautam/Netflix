@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>www.netflix.com</title>
+    {% include 'clientHeader.html' %}
+    <style>
+        .error{
+            color: red;
+        }
+    </style>
+</head>
+<body>
+<div class="img-fluid vh-100"
+     style=";background: url('{% static "media/adminbackgroundimage.jpg" %}') no-repeat fixed center center/cover">
+    <div style="background: rgba(0,0,0,0.7 )" class="vh-100">
+        <nav class="navbar navbar-expand-lg navbar-light" style="background-color: black">
+            <a class="navbar-brand" href="#"><img src="https://cdn.worldvectorlogo.com/logos/netflix-2.svg"
+                                                  class="img-fluid" style="width: 11rem;height:2rem;margin-left: 2rem"
+                                                  alt=""></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText"
+                    aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarText">
+                <ul class="navbar-nav mr-auto"></ul>
+                <span class="navbar-text">
+    </span>
+            </div>
+        </nav>
+        <br>
+        <br>
+        <br>
+        <div class="p-5 text-white w-50 text-center mx-auto">
+            <div class="font-weight-bolder display-2 m-4">Lost your way?</div>
+            <p class="h4 mt-3 mb-3">Sorry, we can,t find that page. You'll find lots to explore on the home page</p>
+            <a href="/" class="text-decoration-none text-dark btn btn-light btn-lg mt-3 mb-3">Netflix Home</a>
+            <div class="font-weight-lighter h4 mt-4" ><span style="border-left: red solid 2px;padding-left: 1rem">Error Code </span>&nbsp;&nbsp;&nbsp;<span class="font-weight-bold"> 404 - page not found</span></div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

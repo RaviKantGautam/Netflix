@@ -1,0 +1,116 @@
+{% load static %}
+<style>
+    .navbar-light .navbar-nav .nav-link:hover {
+        transition: .5s ease-in-out;
+        background: #ffffff;
+        outline: white;
+        border-radius: 10px;
+    }
+
+    .dropdown-item:hover {
+        transition: .5s ease-in-out;
+        background-color: #007bff;
+    }
+
+    li {
+        margin: 0 10px 0 10px;
+    }
+</style>
+<nav class="navbar navbar-expand-lg navbar-dark sticky-top small" style="background: black">
+    <a class="navbar-brand" href="/">
+        <img src="https://cdn.vox-cdn.com/thumbor/AwKSiDyDnwy_qoVdLPyoRPUPo00=/39x0:3111x2048/1400x1400/filters:focal(39x0:3111x2048):format(png)/cdn.vox-cdn.com/uploads/chorus_image/image/49901753/netflixlogo.0.0.png"
+             width="30" height="30" alt="Loading...">
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01"
+            aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+        <a class="navbar-brand pr-2" href="/" style="border-right: 2px red solid">Netflix</a>
+        <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+            <li class="nav-item">
+                <a class="nav-link active" href="browse">
+                    Home
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="allshows?catname=Tv Shows" role="button">
+                    Tv Shows
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="allshows?catname=Movies" role="button">
+                    Movies
+                </a>
+            </li>
+
+        </ul>
+        <span class="mr-2 ml-2">
+            <form action="allshows" class="form-inline">
+
+                <div class="input-group">
+      <input type="search" id="search" name="search" class="form-control bg-dark border-dark" placeholder="Search...">
+        <div class="input-group-append">
+        <span class="input-group-text bg-dark border-dark"><i class="fa fa-search text-white"></i></span>
+      </div>
+    </div>
+  </form>
+        </span>
+        <span><button type="button" data-placement="bottom" title="Change Password" data-toggle="modal"
+                      data-target="#mymodalchangepassword"
+                      class="btn btn-dark border-dark ml-2 mr-2"><i class="fa fa-cog text-white"></i></button></span>
+        <span><a href="logout" data-toggle="tooltip" data-placement="bottom" title="Logout" class="btn text-white btn-dark ml-2 mr-2"><i class="fa fa-sign-out-alt"></i></a></span>
+        <span class="text-light">Welcome, {{ request.session.client.clientName }}</span>
+    </div>
+</nav>
+
+<div class="modal fade" tabindex="-1" role="dialog" id="mymodalchangepassword">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Change Password</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action="ChangePassword" method="post" id="ChangePassword">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="password">Old Password</label>
+                        <input type="password" class="form-control" id="opassw" name="opassw">
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="password">New Password</label>
+                                <input type="password" class="form-control" id="npassw" name="cpassw">
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="cpassword">Confirm Password</label>
+                                <input type="password" class="form-control" data-rule-equalto="#npassw"
+                                       name="npassw" data-msg-equalto="Please same Password">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div id="error"></div>
+                    </div>
+                    <div class="form-group text-center">
+                        <input type="button" onclick="changepassword()" value="Submit"
+                               class="btn btn-outline-primary w-50">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $("#ChangePassword").validate();
+    $(document).ready(function () {
+        $('[data-toggle="tooltip"]').tooltip();
+        searchlist();
+    })
+</script>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    {% load static %}
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Add Genre</title>
+    {% include 'adminHeader.html' %}
+    <link rel="stylesheet" href="{% static 'mycss/style4.css' %}">
+</head>
+<body>
+{% include 'adminNavbardashboard.html' %}
+{% if message %}
+    <script>
+        alert("{{ message }}")
+    </script>
+{% endif %}
+<form action="addgenre" method="post" id="myform" class="mx-auto p-5 text-light w-75 box" style="margin-top: 5%;">
+    {% csrf_token %}
+    <h1 class="text-center font-weight-bolder"
+        style="background: linear-gradient(transparent 10%,red);border-radius: 15px">Add Genre</h1>
+    <div class="form-group">
+        <label for="genre">Enter genre</label>
+        <input type="text" required autofocus name="genre" placeholder="Enter genre" class="form-control"></div>
+    <div class="form-group">
+        <label for="description">Description</label>
+        {#        <input type="text" required name="description" placeholder="enter description" class="form-control">#}
+        <textarea name="description" id="description" required placeholder="Enter description" rows="5"
+                  class="form-control"></textarea>
+    </div>
+    <div class="form-group text-right">
+        <input type="submit" value="submit" class="btn w-50 btn-outline-light badge-pill">
+    </div>
+</form>
+<script>
+    $('#myform').validate();
+</script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#sidebarCollapse').on('click', function () {
+            $('#sidebar').toggleClass('active');
+            $(this).toggleClass('active');
+        });
+    });
+</script>
+{% include 'adminNavbarfoot.html' %}
+</body>
+</html>

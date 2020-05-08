@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+<head>
+    {% load static %}
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>DashBoard</title>
+    {% include 'adminHeader.html' %}
+    <link rel="stylesheet" href="{% static 'mycss/style4.css' %}">
+</head>
+<body>
+{% include 'adminNavbardashboard.html' %}
+<div class="container my-4 p-5 text-white box">
+    <div class="display-4 text-center font-weight-bold">Episode</div>
+    <hr class="bg-light">
+    <table class="table table-bordered table-hover" style="background: rgba(255,255,255,0.59)">
+        <thead class="thead-dark">
+        <tr>
+            <th>#</th>
+            <th>SERIES NAME</th>
+            <th>EPISODE TITLE</th>
+            <th>DESCRIPTION</th>
+            <th>CAST</th>
+            <th>RATING &#9734;&#9734;&#9734;</th>
+            <th>PHOTO</th>
+            <th colspan="2">ACTION</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% if ar %}
+        {% for row in ar %}
+            <tr>
+                <td>{{ row.srno }}</td>
+                <td>{{ row.seriesname }}</td>
+                <td>{{ row.name }}</td>
+                <td>{{ row.descp }}</td>
+                <td>{{ row.cast }}</td>
+                <td>{{ row.rating }} &#9734;</td>
+                <td><a href="static/media/{{ row.photo }}" data-lightbox="image-1" data-title="{{ row.name }}"><img src="{% static 'media/' %}{{ row.photo }}" class="img-fluid" width="400px" height="400px"></a></td>
+                <td class="text-center"><a onclick="editEpisodemodel({{ row }})"> <i
+                        class="fa fa-edit text-primary"></i></a></td>
+                <td class="text-center"><a onclick="deleteEpisode('{{ row.eid }}','{{ row.name }}')"> <i
+                        class="fa fa-trash text-danger"></i> </a></td>
+            </tr>
+
+        {% endfor %}
+            {% else %}
+            <tr>
+            <td class="display-4 text-white text-center font-weight-bolder" colspan="9">Noting to show!!</td>
+            </tr>
+        {% endif %}
+
+        </tbody>
+    </table>
+</div>
+{% include 'adminNavbarfoot.html' %}
+
+<div class="modal fade" id="myModaleditEpisode" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title"><span id="title"></span></h4>
+            </div>
+            <div class="modal-body">
+                <form method="post" id="myform" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="episode name">Change Episode Name</label>
+                        <textarea id="name" name="name" required placeholder="Change Episode Name"
+                                  class="form-control"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="description">Description</label>
+                        <textarea id="description" name="description" rows="5" required placeholder="Change description"
+                                  class="form-control"></textarea>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="photo">Photo</label>
+                                <span class="custom-file" style="overflow: hidden">
+                            <label for="" id="labelimgname" class="custom-file-label small"></label>
+                            <input type="file" name="file" onchange="readURL(this)" id="file" class="custom-file-input"
+                                   accept=".jpg,.jpeg,.png">
+                        </span>
+                                <img src="" alt="" id="photo" name="photo" class='img-fluid'>
+                                {#                                <input type="file" required id="photo" name="photo" class="form-control">#}
+                                <script>
+                                    var file = document.getElementById("file");
+                                    var img = document.getElementById("photo");
+                                    var labelimgname = document.getElementById("labelimgname");
+
+                                    function readURL(input) {
+                                        var reader = new FileReader();
+                                        reader.onload = function (e) {
+                                            img.src = e.target.result;
+                                            labelimgname.innerHTML = input.files[0].name;
+                                        };
+                                        reader.readAsDataURL(input.files[0]);
+                                    }
+                                </script>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="cast">Cast</label>
+                                <input type="text" required placeholder="cast" name="cast" id="cast"
+                                       class="form-control">
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="rating">Ratings</label>
+                                <input type="number" min="1" max="10" required placeholder="rating" name="rating"
+                                       id="rating"
+                                       class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group text-center">
+                        <input type="button" onclick="updateEpisode()" value="submit" class="btn w-50 btn-outline-primary badge-pill">
+                    </div>
+                    <input type="hidden" name="eid" id="eid">
+                    <div id="error"></div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#myform').validate();
+        $('#sidebarCollapse').on('click', function () {
+            $('#sidebar').toggleClass('active');
+            $(this).toggleClass('active');
+        });
+    });
+</script>
+</body>
+</html>

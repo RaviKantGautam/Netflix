@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+    {% load static %}
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>DashBoard</title>
+    {% include 'adminHeader.html' %}
+    <link rel="stylesheet" href="{% static 'mycss/style4.css' %}">
+    <script src="{% static 'myjs/myjs.js' %}"></script>
+</head>
+<body>
+{% include 'adminNavbardashboard.html' %}
+<div class="container mx-auto my-4 p-5 text-white box">
+    <div class="display-4 text-center font-weight-bold">Genre</div>
+    <hr class="bg-light">
+    <table class="table table-bordered table-hover" style="background: rgba(255,255,255,0.59)">
+        <thead class="thead-dark">
+        <tr>
+            <th>Sr. No.</th>
+            <th>GENRE-ID</th>
+            <th>GENRE</th>
+            <th>DESCRIPTION</th>
+            <th>DELETE</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% if ar %}
+            {% for row in ar %}
+                <tr>
+                    <td>{{ row.srno }}</td>
+                    <td>{{ row.genreid }}</td>
+                    <td>{{ row.genre }}</td>
+                    <td>{{ row.description }}</td>
+                    <td class="text-center"><a onclick="deletegenre({{ row.genreid }},'{{ row.genre }}')"
+                                               style="cursor: pointer"><i class="fa fa-trash text-danger"></i></a></td>
+                </tr>
+
+            {% endfor %}
+        {% else %}
+            <tr>
+                <td colspan="5" class="text-center text-white font-weight-bolder display-4">Nothing to show!</td>
+            </tr>
+        {% endif %}
+
+        </tbody>
+    </table>
+</div>
+{% include 'adminNavbarfoot.html' %}
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#sidebarCollapse').on('click', function () {
+            $('#sidebar').toggleClass('active');
+            $(this).toggleClass('active');
+        });
+    });
+</script>
+</body>
+</html>

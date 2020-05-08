@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>{{ title }}</title>
+    {% include 'adminHeader.html' %}
+    <script>
+        $('#adminLogin').validate();
+    </script>
+    <style>
+        .error {
+            color: red;
+        }
+
+        td {
+            font-size: 1.2em;
+            font-weight: bold;
+        }
+
+        label {
+            font-size: 1.5em;
+        }
+    </style>
+</head>
+<body style="background: url('{% static "media/adminbackgroundimage.jpg" %}') no-repeat fixed center center">
+{% if message %}
+    <script>
+        alert('{{ message }}');
+    </script>
+{% endif %}
+<div class="container text-white mx-auto w-50 p-5"
+     style="margin-top: 8%;box-shadow: white 6px 1px 32px;background-color: rgba(0,0,0,0.4)">
+    <div class="text-center h1 font-weight-bold">Admin Login</div>
+    <hr class="bg-light" style="height: 5px">
+    <form action="adminLogin" method="post" id="adminLogin">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" class="form-control" name="email" autofocus data-rule-required="true">
+        </div>
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" class="form-control" id="passw" name="passw">
+        </div>
+        <div class="form-group text-center">
+            <input type="submit" value="Submit" class="btn btn-outline-primary w-50">
+
+        </div>
+        <div class="form-group">
+            <span class="float-right mt-1 text-danger"><a type="button" data-toggle="modal"
+                                                         data-target="#forgetadminpassword">Forget Passsword?</a></span>
+        </div>
+    </form>
+</div>
+
+<div class="modal" id="forgetadminpassword">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">Forget Password</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+
+            <!-- Modal body -->
+            <div class="modal-body">
+                <form action="#">
+                    <input type="email" class="form-control" id="otpemail" placeholder="Enter Email.Otp will be send!">
+                    <p class="h1 text-center">or</p>
+                    <input type="tel" class="form-control" id="otpphone"
+                           placeholder="Enter phone number.Otp will be send!">
+                    <div id="otperror"></div>
+                    <button type="button" onclick="forgetpassword('admin')"
+                            class="btn btn-outline-danger badge-pill w-100">continue
+                    </button>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+</body>
+</html>

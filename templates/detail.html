@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>www.netflix.com</title>
+    {% include 'clientHeader.html' %}
+</head>
+<body>
+<div class="container-fluid">
+    <div style="background: url('{% static "media/" %}{{ context.5 }}') no-repeat fixed center center/cover"
+         class="vh-100">
+    {% if request.session.client %}
+        {% include 'navbarafterlogin.html' %}
+        {% else %}
+    {% include 'navbarBeforeLogin.html' %}
+    {% endif %}
+
+        <div class="h-100" style="background: linear-gradient(90deg,rgba(0,0,0,0.8) 40%,transparent)">
+            <div class="p-5 w-50  text-white">
+                <div style="margin-top: 27%">
+                    <img src="{% static 'media/nficon2016.ico' %}" alt="" height="30px">
+                    <span style="word-spacing: 10px" class="text-uppercase small">{{ context.3 }}</span>
+                    <div class="display-4 text-uppercase font-weight-bolder">{{ context.1 }}</div>
+                    <br>
+                    <br>
+                    <div class="h4 text-uppercase font-weight-bolder">{{ context.1 }}</div>
+                    <br>
+                    <p>{{ context.2 }}
+                    </p>
+                    <br>
+                    <div><span class="text-white-50">Starring: </span>{{ context.7 }}</div>
+                    <div><span class="text-white-50">Rating: </span>{{ context.8 }} &#9734;</div>
+                    <br>
+                    {% if type == 'movie' %}
+                        <a href="{% static 'media/' %}{{ context.6 }}" class="btn btn-red w-50">Play >></a>
+                    {% else %}
+                        <a href="{% static 'media/' %}{{ context.6 }}" class="btn btn-red w-50">Play/Trailer >></a>
+                    {% endif %}
+                    <br>
+                </div>
+            </div>
+        </div>
+    {% if request.session.client == False %}
+        <div class="p-2 text-white mr-5 ml-5" style="background: #4b4b4b">
+            <img src="{% static 'media/nficon2016.ico' %}" alt="" height="40px">
+            <span>Watch all you want.</span>
+            <button class="btn btn-red float-right">JOIN NOW</button>
+        </div>
+
+    {% endif %}
+
+        <br>
+    {% if season %}
+      <div class="p-2 text-white mr-5 ml-5 list-group w-50">
+           <div class="display-4 text-white">Episode</div>
+           <br>
+            {% for i in season %}
+                 {{ i.srno }}. <a class="list-group-item btn-outline-primary text-decoration-none" href="{% static 'media/' %}{{ i.video }}">{{ i.name }} - ({{ i.descp }})</a>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+        <br>
+        <br>
+        {% include 'clientfooter.html' %}
+    </div>
+</div>
+</body>
+</html>

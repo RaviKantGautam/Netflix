@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+    {% load static %}
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Add Videos</title>
+    {% include 'adminHeader.html' %}
+    {#    <link rel="stylesheet" href="{% static 'mycss/style4.css' %}">#}
+    <style>
+        label {
+            font-size: 1.5em;
+            line-height: 2em;
+        }
+    </style>
+</head>
+<body style="background: url('{% static "media/adminbackgroundimage.jpg" %}') no-repeat fixed center center">
+{% include 'adminNavbardashboard.html' %}
+{% if message %}
+    <script>
+        alert('{{ message }}')
+    </script>
+{% endif %}
+<form action="addvideos" method="post" id="myform" class="p-5 text-light ml-3 mr-3 box" enctype="multipart/form-data">
+    {% csrf_token %}
+    <h1 class="text-center font-weight-bolder"
+        style="background: linear-gradient(transparent 10%,red);border-radius: 15px">Add Videos</h1>
+    <div class="form-group">
+        <label for="title">Title</label>
+        <input type="title" autofocus id="title" required name="title" placeholder="Enter Movie/Series Title"
+               class="form-control">
+    </div>
+    <div class="form-group">
+        <label for="description">Description</label>
+        <textarea id="description" name="description" required placeholder="Enter Description"
+                  class="form-control"></textarea>
+    </div>
+<div class="row"><div class="col-sm-6">
+    <div class="form-group">
+        <label for="cast">Cast</label>
+        <input type="text" required placeholder="Cast Names" class="form-control" name="cast" id="cast">
+    </div>
+</div>
+    <div class="col-sm-6">
+<div class="form-group">
+    <label for="rating">Rating</label>
+    <input type="number" min="1" max="10" name="rating" id="rating" required class="form-control">
+</div>
+</div></div>
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="form-group">
+                <label for="catname">Category Name</label>
+                <select name="catname" id="catname" class="form-control" onchange="decision(this.value)">
+                    <optgroup label="SELECT Category Name"></optgroup>
+                    {% for item in ar.0 %}
+                        <option value='{{ item.catname }}'>{{ item.catname }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="form-group">
+                <label for="genrename">Genre Name</label>
+                <select name="genre" id="genre" class="form-control">
+                    <optgroup label="SELECT Genre Name"></optgroup>
+                    {% for item in ar.1 %}
+                        <option value='{{ item.genreid }}'>{{ item.genre }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="form-group">
+                <label for="photo">Photo</label>
+                <input type="file" required id="photo" name="photo" class="form-control">
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="form-group">
+                <label for="videos">Choose Video</label>
+                <input type="file" required class="form-control" name="videos" id="videos">
+            </div>
+        </div>
+    </div>
+    <div class="form-group text-center">
+        <input type="submit" value="submit" class="btn w-50 btn-outline-light badge-pill">
+    </div>
+</form>
+<script>
+    $('#myform').validate();
+</script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#sidebarCollapse').on('click', function () {
+            $('#sidebar').toggleClass('active');
+            $(this).toggleClass('active');
+        });
+    });
+</script>
+{% include 'adminNavbarfoot.html' %}
+</body>
+</html>

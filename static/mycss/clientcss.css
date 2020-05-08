@@ -1,0 +1,15 @@
+.btn-red {
+    color: #fff;
+    background-color: #e50914;
+    border: 1px solid #e50914;
+    opacity: 0.9;
+}
+
+.btn-red:hover {
+    color: #fff;
+    opacity: 1;
+}
+
+body{
+    background: #1b1b1b;
+}

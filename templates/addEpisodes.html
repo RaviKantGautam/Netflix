@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+    {% load static %}
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>DashBoard</title>
+    {% include 'adminHeader.html' %}
+    <link rel="stylesheet" href="{% static 'mycss/style4.css' %}">
+    <style>
+        label {
+            font-size: 1.5em;
+            line-height: 2em;
+        }
+    </style>
+</head>
+<body style="background: url('{% static "media/adminbackgroundimage.jpg" %}') no-repeat fixed center center">
+{% if message %}
+    <script>
+    alert('{{ message }}')
+    </script>
+{% endif %}
+{% include 'adminNavbardashboard.html' %}
+<form action="addEpisodes" method="post" id="myform" class="p-5 text-light ml-3 mr-3"
+      style="box-shadow: white 6px 1px 32px;background-color: rgba(0,0,0,0.5)"
+      enctype="multipart/form-data">
+    {% csrf_token %}
+    <h1 class="text-center font-weight-bolder" style="background: linear-gradient(transparent 10%,red)">Add Episodes</h1>
+    <div class="form-group">
+        <label for="title">Series Title</label>
+        <select name="title" id="title" class="form-control">
+            <optgroup label="SELECT VIDEO TITLE"></optgroup>
+            {% for item in ar %}
+                <option value='{{ item.vid }}'>{{ item.title }}</option>
+            {% endfor %}
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="episode name">Enter Episode Name </label>
+        <input type="text" id="name" name="name" required placeholder="enter episode name"
+                  class="form-control">
+    </div>
+    <div class="form-group">
+        <label for="description">Description</label>
+        <textarea id="description" name="description" required placeholder="enter description"
+                  class="form-control"></textarea>
+    </div>
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="form-group">
+                <label for="videopath">Video Path</label>
+                <input type="file" required id="videopath" name="videopath" class="form-control">
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="form-group">
+                <label for="photo">Photo</label>
+                <input type="file" required id="photo" name="photo" class="form-control">
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="form-group">
+                <label for="cast">Cast</label>
+                <input type="text" required placeholder="cast" name="cast" class="form-control">
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="form-group">
+                <label for="rating">Ratings</label>
+                <input type="number" min="1" max="10" required placeholder="rating" name="rating" class="form-control">
+            </div>
+        </div>
+    </div>
+    <div class="form-group text-center">
+        <input type="submit" value="submit" class="btn w-25 btn-outline-light badge-pill">
+    </div>
+
+</form>
+<script>
+    $('#myform').validate();
+</script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#sidebarCollapse').on('click', function () {
+            $('#sidebar').toggleClass('active');
+            $(this).toggleClass('active');
+        });
+    });
+</script>
+{% include 'adminNavbarfoot.html' %}
+</body>
+</html>

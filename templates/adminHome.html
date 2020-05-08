@@ -1,0 +1,225 @@
+<!doctype html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Admin Home</title>
+    {% include 'adminHeader.html' %}
+    <style>
+        .error {
+            color: red;
+        }
+
+        .form-control1 {
+            display: block;
+            padding: 0.375rem 0.75rem;
+            font-size: 1rem;
+            line-height: 1.5;
+            color: #495057;
+            background-color: #fff;
+            border: 1px solid #ced4da;
+            border-radius: 0.25rem;
+            transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+        }
+
+        label {
+            font-size: 1.5em;
+        }
+
+        #title {
+            width: 100%;
+            color: black;
+            border-top-right-radius: 20px;
+            border-top-left-radius: 20px;
+            border: 1px red solid;
+            text-decoration: underline deepskyblue;
+            padding: 5px;
+            font-size: 2rem;
+            background: linear-gradient(skyblue 10%, white);
+        }
+    </style>
+</head>
+<body style="background: url('{% static "media/adminbackgroundimage.jpg" %}') no-repeat fixed center center;">
+{% if message %}
+    <script>
+        alert('{{ message }}');
+    </script>
+{% endif %}
+{% include 'adminNavbar.html' %}
+<div class="container">
+    <div class="text-center display-4 font-weight-bold" style="text-decoration: underline red">
+        All Orders
+    </div>
+    <form id="searchid" method="get">
+        <div class="row">
+            <div class="col-sm-3">
+                <div class="form-group">
+                    <br>
+                    <input type="text" class="form-control1 datepicker w-100" placeholder="From: " id="datefrom">
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <div class="form-group">
+                    <br>
+                    <input type="text" class="form-control1 datepicker w-100" placeholder="To: " id="dateto">
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <div class="form-group">
+                    <br>
+                    <select name="status" id="status" class="form-control1 w-100">
+                        <option value="all">All</option>
+                        <option value="pending">Pending</option>
+                        <option value="shipped">Shipped</option>
+                        <option value="Dispatched">Dispatched</option>
+                        <option value="cancelled">Cancelled</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <br>
+                <button type="button" class="btn btn-primary" onclick="searchdata()">Go >></button>
+            </div>
+        </div>
+    </form>
+    <ul class="nav nav-tabs">
+        <li class="nav-item">
+            <button class="nav-link bg-light h3" style="border-top-right-radius: 30px;outline: none"
+                    onclick="getdata('pending')">Pending
+            </button>
+        </li>
+        <li class="nav-item">
+            <button class="nav-link bg-light h3" style="border-top-right-radius: 30px;outline: none"
+                    onclick="getdata('shipped')">Shipped Details
+            </button>
+        </li>
+        <li class="nav-item">
+            <button class="nav-link bg-light h3" style="border-top-right-radius: 30px;outline: none"
+                    onclick="getdata('Dispatched')">Delivered Orders
+            </button>
+        </li>
+        <li class="nav-item">
+            <button class="nav-link bg-light h3" style="border-top-right-radius: 30px;outline: none"
+                    onclick="getdata('cancelled')">Cancelled Orders
+            </button>
+        </li>
+        <div class="table-responsive">
+            <div id="title" class="text-center d-block text-capitalize"></div>
+            <table class="table table-borderless">
+                <thead class="table-dark">
+                <tr>
+                    <th class="pro-thumbnail">Sr. No.</th>
+                    <th class="pro-title">Order No.</th>
+                    <th class="pro-price">DateTime</th>
+                    <th class="pro-price">Grand Total</th>
+                    <th class="pro-quantity">Payment Method</th>
+                    <th class="pro-subtotal">User Email</th>
+                    <th class="pro-remove text-center" colspan="2">Action</th>
+                </tr>
+                </thead>
+                <tbody id="tfilter" class="table-bordered">
+                </tbody>
+            </table>
+        </div>
+    </ul>
+</div>
+<div class="modal fade" id="shipModal" tabindex="-1" role="dialog" aria-labelledby="shipModal"
+     aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <form id="shippingid" method="post">
+                <div class="modal-header">
+                    <h1 class="modal-title mx-auto">Shipping Order</h1>
+                </div>
+                <div class="modal-body">
+                    <input type="hidden" name="email" id="email">
+                    <input type="hidden" name="phone" id="phone">
+                    <div class="form-group">
+                        <label for="#">Tracking ID</label>
+                        <input type="number" data-rule-min="100000" data-rule-max="1000000" class="form-control"
+                               name="trackingid">
+                    </div>
+                    <div class="form-group">
+                        <label for="#">Company Name</label>
+                        <input type="text" class="form-control" name="companyname" data-rule-required="true" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="#">Tracking url:</label>
+                        <input type="url" class="form-control" name="trackingurl" data-rule-required="true" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="#">Remarks</label>
+                        <textarea class="form-control" name="remark"></textarea>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" onclick="shippingconfirm()">Submit changes</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="dispatchedModal" tabindex="-1" role="dialog" aria-labelledby="dispatchedModal"
+     aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <form id="dispatchedid" method="post">
+                <div class="modal-header">
+                    <h1 class="modal-title mx-auto">Dispatched Order</h1>
+                </div>
+                <div class="modal-body">
+                    <input type="hidden" name="disemail" id="disemail">
+                    <input type="hidden" name="disphone" id="disphone">
+                    <label for="#">Person Recieved</label>
+                    <input type="text" name="personrecieved" id="personrecieved" class="form-control" data-rule-required="true" required>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" onclick="dispatchedconfirm()">Submit changes</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="showdetailsModal" tabindex="-1" role="dialog" aria-labelledby="showdetailsModal"
+     aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title mx-auto">Order Detail</h1>
+            </div>
+            <div class="modal-body">
+                <div class="table-responsive">
+                    <table class="table table-borderless">
+                        <thead class="table-dark">
+                        <tr>
+                            <th>Product Name</th>
+                            <th>Quantity</th>
+                            <th>Price</th>
+                            <th>Image</th>
+                        </tr>
+                        </thead>
+                        <tbody id="tdetail" class="table-bordered">
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="modal-footer w-100">
+                <button type="button" class="btn btn-outline-danger w-50 badge-pill" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+        getdata('pending');
+        $('#shippingid').validate();
+        $('#dispatchedid').validate();
+    })
+</script>
+</body>
+</html>

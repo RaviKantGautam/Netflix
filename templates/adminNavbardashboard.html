@@ -1,0 +1,161 @@
+{% load static %}
+<script src="{% static 'myjs/myjs.js' %}"></script>
+<div class="modal fade" tabindex="-1" role="dialog" id="mymodalchangepassword">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Admin Change Password</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form method="post" id="adminChangePassword">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="password " class="h5">Old Password</label>
+                        <input type="password" class="form-control" id="opassw" name="opassw">
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="password" class="h5">New Password</label>
+                                <input type="password" class="form-control" id="npassw">
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="cpassword" class="h5">Confirm Password</label>
+                                <input type="password" class="form-control" data-rule-equalto="#npassw"
+                                       name="npassw" data-msg-equalto="Please same Password">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group text-center">
+                        <input type="button" onclick="changeadminpassword()" value="Submit" class="btn btn-outline-primary w-50">
+                    </div>
+                    <div id="error"></div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $("#adminChangePassword").validate();
+</script>
+<div class="wrapper">
+    <!-- Sidebar Holder -->
+    <nav id="sidebar">
+        <div class="sidebar-header">
+            <h3>Netflix</h3>
+        </div>
+
+        <ul class="list-unstyled components">
+            {#            <p class="font-weight-bold text-uppercase">{{ request.session.adminlogin.1 }}</p>#}
+            <li class="active">
+                <a href="alladmin">Home</a>
+            </li>
+            <li>
+                <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Add</a>
+                <ul class="collapse list-unstyled" id="homeSubmenu">
+                    <li>
+                        <a href="addgenre">Genre</a>
+                    </li>
+                    <li>
+                        <a href="addcategory">Category</a>
+                    </li>
+                    <li>
+                        <a href="addvideos">Videos</a>
+                    </li>
+                    <li>
+                        <a href="addEpisodes">Episode</a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">View</a>
+                <ul class="collapse list-unstyled" id="pageSubmenu">
+                    <li>
+                        <a href="viewgenre">Genre</a>
+                    </li>
+                    <li>
+                        <a href="viewcategory">Category</a>
+                    </li>
+                    <li>
+                        <a href="viewMovies">Movies</a>
+                    </li>
+                    <li>
+                        <a href="viewEpisode">Episode</a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a type="button" class="dropdown-item" data-toggle="modal" data-target="#mymodalchangepassword">
+                    Change Password <i class="float-right mr-2 mt-1 fa fa-cog"></i>
+                </a>
+            </li>
+            <li>
+                <a href="adminlogout">Logout <i class="fa float-right fa-sign-out-alt pr-2"></i></a>
+            </li>
+        </ul>
+        <br>
+        <br>
+        <img src="https://www.popculthq.com/wp-content/uploads/2017/03/Netflix-gif.gif" alt="" class="img-fluid">
+        <br>
+        <br>
+        <hr class="bg-light">
+        <br>
+        <img src="https://camo.githubusercontent.com/19cfad4976e427bf31ca6a0a3d03728cf2b10704/687474703a2f2f692e696d6775722e636f6d2f4d524b32304b622e676966"
+             alt="" class="img-fluid">
+        <br>
+        <hr class="bg-light">
+        <br>
+        <img src="https://media3.giphy.com/media/3ohzdJox2nEEKFit5m/giphy.gif" alt="" class="img-fluid">
+    </nav>
+
+    <!-- Page Content Holder -->
+    <div id="content">
+
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container-fluid">
+
+                <button type="button" id="sidebarCollapse" class="navbar-btn">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                <button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse"
+                        data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <i class="fas fa-align-justify"></i>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="nav navbar-nav ml-auto">
+                        <li class="nav-item dropdown">
+                            <a style="padding-right: 2.5rem;" class="nav-link dropdown-toggle text-uppercase" href="#"
+                               id="navbarDropdown" role="button"
+                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                {% if request.session.admin %}
+                                {{ request.session.admin.adminEmail }}
+                                {% endif %}
+                            </a>
+                            <div class="dropdown-menu" style="left: -36px;" aria-labelledby="navbarDropdown">
+                                <a type="button" class="dropdown-item"
+                                   data-toggle="modal"
+                                   data-target="#mymodalchangepassword">
+                                    Change Password</i>
+                                </a>
+                                {% if request.session.admin.type == 'Super-Admin' %}
+                                    <a class="dropdown-item" href="adminRegisteration">Add Admin</a>
+                                    <a class="dropdown-item" href="adminview">View Admin</a>
+                                {% endif %}
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item text-danger" href="adminlogout">
+                                    Logout<i class="fas fa-sign-out-alt"></i>
+                                </a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>

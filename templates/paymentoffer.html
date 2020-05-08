@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>www.netflix.com</title>
+    {% include 'clientHeader.html' %}
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+    <style>
+        tr{
+            border-bottom: rgba(0,0,0,0.1) solid 2px;
+        }
+        th:nth-child(2):hover,th:nth-child(3):hover,th:nth-child(4):hover{
+            transition: .5s ease-in-out;
+            background-color: #007bff;
+        }
+    </style>
+</head>
+<body>
+<nav class="navbar sticky-top navbar-expand-lg navbar-light" style="background-color: black;">
+    <a class="navbar-brand" href="/"><img src="https://cdn.worldvectorlogo.com/logos/netflix-2.svg"
+                                          class="img-fluid" style="width: 10rem;height:2rem;" alt=""></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText"
+            aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarText">
+        <ul class="navbar-nav mr-auto"></ul>
+        <span class="navbar-text">
+                        <span class="text-white small">UNLIMITED TV SHOWS & MOVIES</span>
+<a href="logout" class="btn btn-primary text-white ml-3 mr-3">Sign out</a>
+    </span>
+    </div>
+</nav>
+<div class="text-white w-75 mt-5 mx-auto">
+    <div class="display-4 text-center font-weight-bolder">Netflix offers!</div>
+    <br>
+    <input type="hidden" name="clientemail" id="clientemail" value="{{ request.session.client.clientEmail }}">
+    <input type="hidden" name="clientphone" id="clientphone" value="{{ request.session.client.clientPhone }}">
+    <div class="table-responsive-sm">
+        <table class="table table-bordered text-center table-light text-dark">
+            <thead class="text-white" style="background: black">
+            <tr>
+                <th></th>
+                <th>Basic</th>
+                <th>Standard</th>
+                <th>Premium</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>Monthly Price</td>
+                <td>&#8377; 600</td>
+                <td>&#8377; 1000</td>
+                <td>&#8377; 1200</td>
+            </tr>
+            <tr>
+                <td>HD available</td>
+                <td>&#x2717;</td>
+                <td>&#10004;</td>
+                <td>&#10004;</td>
+
+            </tr>
+            <tr>
+                <td>Ultra HD available</td>
+                <td>&#x2717;</td>
+                <td>&#x2717;</td>
+                <td>&#10004;</td>
+            </tr>
+            <tr>
+                <td>Screen you can watch on one time</td>
+                <td>1</td>
+                <td>2</td>
+                <td>4</td>
+            </tr>
+            <tr>
+                <td>Watch on your Laptop,Tv,phone and tablet</td>
+                <td>&#10004;</td>
+                <td>&#10004;</td>
+                <td>&#10004;</td>
+            </tr>
+            <tr>
+                <td>Unlimited movie and TV shows</td>
+                <td>&#10004;</td>
+                <td>&#10004;</td>
+                <td>&#10004;</td>
+            </tr>
+            <tr>
+                <td>Cancel anytime</td>
+                <td>&#10004;</td>
+                <td>&#10004;</td>
+                <td>&#10004;</td>
+            </tr>
+            <tr>
+                <td></td>
+                <td><button onclick="payment('600','person1')" class="btn w-100 btn-red">Buy</button></td>
+                <td><button onclick="payment('1000','person2')" class="btn w-100 btn-red">Buy</button></td>
+                <td><button onclick="payment('1200','person4')" class="btn w-100 btn-red">Buy</button></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+</div>
+<br>
+<br>
+{% include 'clientfooter.html' %}
+</body>
+</html>

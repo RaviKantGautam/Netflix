@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>www.netflix.com</title>
+    {% include 'clientHeader.html' %}
+    <style>
+        .container-fluid {
+            font-size: 1.4rem;
+        }
+
+        .title {
+            font-size: 2rem;
+        }
+
+        .section-title {
+            font-size: 1.4rem;
+        }
+
+        .img-fluid {
+            height: 168px;
+            max-height: 168px;
+            width: 330px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container-fluid">
+    {% include 'navbarafterlogin.html' %}
+    {#    <div class="text-white">{{ context }}</div>#}
+    <div class="text-white ml-3 mr-3">
+        <br>
+        <br>
+    <div class="display-4 font-weight-bolder text-white text-center mb-5 pb-5" style="border-bottom: red solid 2px">{{ videocat }}</div>
+        <div class="container-fluid">
+            {% for i in context %}
+                <a href="detail?q={{ i.vid }}">
+                    <div class="card bg-transparent m-3" style="width: 300px;display: inline-block;">
+                            <img class="img-fluid" style="width:300px;height: 300px" src="{% static 'media/' %}{{ i.photo }}" alt="Card image">
+                            <span class="card-title text-white-50">{{ i.title }}</span>
+                    </div>
+                </a>
+            {% endfor %}
+
+        </div>
+    </div>
+</div>
+
+<hr>
+<br>
+{% include 'clientfooter.html' %}
+</body>
+</html>
