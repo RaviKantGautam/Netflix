@@ -22,10 +22,10 @@ def adminRegisteration(request):
                     str(mobile).isnumeric() == True) and str(
                 type).isnumeric() == False:
                 s = 'insert into admin values ("{}","{}","{}","{}")'.format(email, password, type, mobile)
-                print(s)
+                # print(s)
 
                 result = Insert(s)
-                print(s)
+                # print(s)
                 if result == 'success':
                     return redirect(adminview)
                 else:

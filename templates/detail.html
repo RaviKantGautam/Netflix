@@ -6,7 +6,7 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>www.netflix.com</title>
+    <title>www.pandora.com</title>
     {% include 'clientHeader.html' %}
 </head>
 <body>
@@ -22,7 +22,7 @@
         <div class="h-100" style="background: linear-gradient(90deg,rgba(0,0,0,0.8) 40%,transparent)">
             <div class="p-5 w-50  text-white">
                 <div style="margin-top: 27%">
-                    <img src="{% static 'media/nficon2016.ico' %}" alt="" height="30px">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/4/46/Pandora_Logo_RGB_thumbnail_new_large.png" alt="" height="30px">
                     <span style="word-spacing: 10px" class="text-uppercase small">{{ context.3 }}</span>
                     <div class="display-4 text-uppercase font-weight-bolder">{{ context.1 }}</div>
                     <br>
@@ -36,9 +36,9 @@
                     <div><span class="text-white-50">Rating: </span>{{ context.8 }} &#9734;</div>
                     <br>
                     {% if type == 'movie' %}
-                        <a href="{% static 'media/' %}{{ context.6 }}" class="btn btn-red w-50">Play >></a>
+                        <a href="{% static 'media/' %}{{ context.6 }}" class="btn btn-primary w-50">Play >></a>
                     {% else %}
-                        <a href="{% static 'media/' %}{{ context.6 }}" class="btn btn-red w-50">Play/Trailer >></a>
+                        <a href="{% static 'media/' %}{{ context.6 }}" class="btn btn-primary w-50">Play/Trailer >></a>
                     {% endif %}
                     <br>
                 </div>
@@ -46,7 +46,7 @@
         </div>
     {% if request.session.client == False %}
         <div class="p-2 text-white mr-5 ml-5" style="background: #4b4b4b">
-            <img src="{% static 'media/nficon2016.ico' %}" alt="" height="40px">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/4/46/Pandora_Logo_RGB_thumbnail_new_large.png" alt="" height="40px">
             <span>Watch all you want.</span>
             <button class="btn btn-red float-right">JOIN NOW</button>
         </div>

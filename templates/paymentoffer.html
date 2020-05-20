@@ -6,7 +6,7 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>www.netflix.com</title>
+    <title>www.pandora.com</title>
     {% include 'clientHeader.html' %}
     <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
     <style>
@@ -21,7 +21,7 @@
 </head>
 <body>
 <nav class="navbar sticky-top navbar-expand-lg navbar-light" style="background-color: black;">
-    <a class="navbar-brand" href="/"><img src="https://cdn.worldvectorlogo.com/logos/netflix-2.svg"
+    <a class="navbar-brand" href="/"><img src="{% static 'media/pandora_2016_logo-removebg-preview.png' %}"
                                           class="img-fluid" style="width: 10rem;height:2rem;" alt=""></a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText"
             aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
@@ -36,7 +36,7 @@
     </div>
 </nav>
 <div class="text-white w-75 mt-5 mx-auto">
-    <div class="display-4 text-center font-weight-bolder">Netflix offers!</div>
+    <div class="display-4 text-center font-weight-bolder">Pandora offers!</div>
     <br>
     <input type="hidden" name="clientemail" id="clientemail" value="{{ request.session.client.clientEmail }}">
     <input type="hidden" name="clientphone" id="clientphone" value="{{ request.session.client.clientPhone }}">
@@ -96,9 +96,9 @@
             </tr>
             <tr>
                 <td></td>
-                <td><button onclick="payment('600','person1')" class="btn w-100 btn-red">Buy</button></td>
-                <td><button onclick="payment('1000','person2')" class="btn w-100 btn-red">Buy</button></td>
-                <td><button onclick="payment('1200','person4')" class="btn w-100 btn-red">Buy</button></td>
+                <td><button onclick="payment('600','person1')" class="btn w-100 btn-primary">Buy</button></td>
+                <td><button onclick="payment('1000','person2')" class="btn w-100 btn-primary">Buy</button></td>
+                <td><button onclick="payment('1200','person4')" class="btn w-100 btn-primary">Buy</button></td>
             </tr>
             </tbody>
         </table>

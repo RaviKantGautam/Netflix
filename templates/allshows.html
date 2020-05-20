@@ -6,7 +6,7 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>www.netflix.com</title>
+    <title>www.pandora.com</title>
     {% include 'clientHeader.html' %}
     <style>
         .container-fluid {
@@ -36,7 +36,7 @@
     <div class="text-white ml-3 mr-3">
         <br>
         <br>
-    <div class="display-4 font-weight-bolder text-white text-center mb-5 pb-5" style="border-bottom: red solid 2px">{{ videocat }}</div>
+    <div class="display-4 font-weight-bolder text-white text-center mb-5 pb-5" style="border-bottom: blueviolet solid 2px">{{ videocat }}</div>
         <div class="container-fluid">
             {% for i in context %}
                 <a href="detail?q={{ i.vid }}">

@@ -9,6 +9,4 @@ venv/
 .installed.cfg
 pip-log.txt
 parts/
-dist/
-downloads/
 .Python

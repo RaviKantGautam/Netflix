@@ -3,7 +3,7 @@
 
 body {
     font-family: 'Poppins', sans-serif;
-    background: url('../media/adminbackgroundimage.jpg') no-repeat fixed center center/cover;
+    background: url('../media/pandoralogin.png') no-repeat fixed center center/cover;
 }
 
 p {
@@ -57,7 +57,7 @@ a, a:hover, a:focus {
 #sidebar {
     min-width: 250px;
     max-width: 250px;
-    background: #c63c3cd1;
+    background: #0062cc;
     color: #fff;
     transition: all 0.6s cubic-bezier(0.945, 0.020, 0.270, 0.665);
     transform-origin: bottom left;
@@ -96,7 +96,7 @@ a, a:hover, a:focus {
 
 #sidebar ul li.active > a, a[aria-expanded="true"] {
     color: #fff;
-    background: #c63c3c;
+    background: #007bff;
 }
 
 
@@ -115,7 +115,7 @@ a[data-toggle="collapse"] {
 ul ul a {
     font-size: 0.9em !important;
     padding-left: 30px !important;
-    background: #993b3c;
+    background: #00a5cc;
 }
 
 ul.CTAs {

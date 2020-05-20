@@ -16,12 +16,12 @@
             opacity: 0.7;
         }
         label{
-            color: black;
+            color: white;
             font-weight: bolder;
         }
     </style>
 </head>
-<body style="background: url('{% static "media/adminbackgroundimage.jpg" %}') no-repeat fixed center center;">
+<body>
 {% if message %}
     <script>
         alert('{{ message }}');
@@ -29,9 +29,9 @@
 {% endif %}
 {#{% include 'adminNavbar.html' %}#}
 {% include 'adminNavbardashboard.html' %}
-<div class="container row mx-auto p-5 text-light" style="margin-top: 4%;box-shadow: white 6px 1px 32px;background: linear-gradient(transparent,white);border-top: red solid 2px">
+<div class="container row mx-auto p-5 text-light" style="margin-top: 4%;box-shadow: white 6px 1px 32px;background: linear-gradient(transparent,black);border-top: red solid 2px">
     <div class="col-sm-6">
-        <img src="https://cdn.vox-cdn.com/thumbor/AwKSiDyDnwy_qoVdLPyoRPUPo00=/39x0:3111x2048/1400x1400/filters:focal(39x0:3111x2048):format(png)/cdn.vox-cdn.com/uploads/chorus_image/image/49901753/netflixlogo.0.0.png"
+        <img src="https://upload.wikimedia.org/wikipedia/commons/4/46/Pandora_Logo_RGB_thumbnail_new_large.png"
              alt="" class="img-fluid">
     </div>
     <div class="col-sm-6">

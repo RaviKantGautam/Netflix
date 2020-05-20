@@ -1,5 +1,6 @@
+{% load static %}
 <nav class="navbar sticky-top navbar-expand-lg navbar-light" style="background-color: black;">
-    <a class="navbar-brand" href="#"><img src="https://cdn.worldvectorlogo.com/logos/netflix-2.svg"
+    <a class="navbar-brand" href="#"><img src="{% static 'media/pandora_2016_logo-removebg-preview.png' %}"
                                           class="img-fluid" style="width: 10rem;height:2rem;" alt=""></a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText"
             aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
@@ -10,7 +11,7 @@
         <span class="navbar-text">
                         <span class="text-white small">UNLIMITED TV SHOWS & MOVIES</span>
 
-                        <button class="btn btn-sm small btn-red ml-2 pl-4 pr-4 mr-2">JOIN NOW</button>
+                        <button onload="window.location.href='login'" class="btn btn-sm small btn-primary ml-2 pl-4 pr-4 mr-2">JOIN NOW</button>
       <a href="login" class="btn btn-sm btn-light mr-2 small pl-4 pr-4">SIGN IN</a>
     </span>
     </div>
